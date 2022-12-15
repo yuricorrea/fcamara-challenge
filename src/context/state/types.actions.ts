@@ -1,0 +1,9 @@
+export default {
+  FETCH_ANTS: 'FETCH_ANTS',
+  ANTS_DATA: 'ANTS_DATA',
+  FETCH_ODD: 'FECH_ODD',
+  SET_ODD: 'SET_ODD',
+  START_RACE: 'START_RACE',
+  END_RACE: 'END_RACE',
+  RESET: 'RESET',
+};
