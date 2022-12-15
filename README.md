@@ -9,7 +9,7 @@ Ant race likelihood
 Clone the project
 
 ```bash
-  git clone https://github.com/yuricorrea/fcamara-challenge.gi
+  git clone https://github.com/yuricorrea/fcamara-challenge.git
 ```
 
 Go to the project directory
