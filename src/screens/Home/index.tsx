@@ -23,6 +23,7 @@ const Home = (): JSX.Element => {
     <Styles.Container>
       <Button
         onPress={handlePress}
+        disabled={isLoading}
         label={i18n.t(`labels.${!isLoading ? 'fetchAnts' : 'loading'}`)}
       />
     </Styles.Container>

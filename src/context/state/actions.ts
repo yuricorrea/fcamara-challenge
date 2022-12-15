@@ -61,6 +61,7 @@ const Actions = (
     dispatch({
       type: Types.RESET,
     });
+    navigation.dispatch(StackActions.popToTop());
   };
 
   const startRace = (): void => {

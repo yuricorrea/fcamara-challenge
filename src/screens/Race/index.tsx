@@ -25,10 +25,14 @@ const Race = (): JSX.Element => {
 
   const renderItem = ({item}: IItem) => <Ant item={item} />;
 
+  const sorted = state.ants.sort((a, b) =>
+    (a?.odd || 0) > (b?.odd || 0) ? -1 : 1,
+  );
+
   return (
     <Styles.Container>
       <FlatList
-        data={state.ants}
+        data={sorted}
         keyExtractor={(i,k) => `${k}`}
         renderItem={renderItem}
         ItemSeparatorComponent={Styles.Separator}
