@@ -2,25 +2,34 @@ import {IAnt, IContextState} from '../../types';
 import {generateAntWinLikelihoodCalculator, getAntData} from '../api';
 import Types from '../state/types.actions';
 import * as constants from '../../types/constants';
+import {StackActions} from '@react-navigation/native';
+import RoutePath from '../../routes/RoutePath';
 
-const Actions = (state: IContextState, dispatch: Function) => {
+interface INavigation {
+  dispatch: Function;
+}
+
+const Actions = (
+  state: IContextState,
+  dispatch: Function,
+  navigation: INavigation,
+) => {
   const fetchAnts = async (): Promise<void> => {
     dispatch({
       type: Types.FETCH_ANTS,
-      raceState: constants.IN_PROGRESS,
+      loadState: constants.IN_PROGRESS,
     });
     const response = await getAntData();
     if (!response) {
       dispatch({
         type: Types.FETCH_ANTS,
-        raceState: constants.NOT_YET_RUN,
+        loadState: constants.NOT_YET_RUN,
       });
       return;
     }
     dispatch({
       type: Types.ANTS_DATA,
       ants: response.ants.map(function (ant, index) {
-        generateOdd(index);
         return {
           ...ant,
           index,
@@ -28,6 +37,7 @@ const Actions = (state: IContextState, dispatch: Function) => {
         } as IAnt;
       }),
     });
+    navigation.dispatch(StackActions.push(RoutePath.RACE));
   };
 
   const oddPercent = (odd: number): number => Number((odd * 100).toFixed(2));
@@ -38,7 +48,6 @@ const Actions = (state: IContextState, dispatch: Function) => {
       index,
     });
     generateAntWinLikelihoodCalculator()((odd: number) => {
-      // will set the odd only if the race is not completed yet.
       dispatch({
         type: Types.SET_ODD,
         index,
@@ -55,8 +64,16 @@ const Actions = (state: IContextState, dispatch: Function) => {
   };
 
   const startRace = (): void => {
+    // only if data has been fetched
+    if (!state.ants.length) {
+      return;
+    }
     dispatch({
       type: Types.START_RACE,
+    });
+    //  running calculations on all ants simultaneously.
+    state.ants.forEach(ant => {
+      generateOdd(ant.index);
     });
   };
 

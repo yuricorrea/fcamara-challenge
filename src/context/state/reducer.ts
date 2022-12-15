@@ -4,12 +4,14 @@ import Types from './types.actions';
 
 export const initialState: IContextState = {
   ants: [],
+  loadState: constants.NOT_YET_RUN,
   raceState: constants.NOT_YET_RUN,
 };
 
 interface IAction {
   type: string;
   raceState?: states;
+  loadState?: states;
   ants?: IAnt[];
   index?: number;
   odd?: number;
@@ -24,12 +26,12 @@ export const reducer = (
     case Types.FETCH_ANTS:
       return {
         ...state,
-        raceState: action?.raceState || state.raceState,
+        loadState: action?.loadState || state.loadState,
       };
     case Types.ANTS_DATA:
       return {
         ...state,
-        raceState: constants.CALCULATED,
+        loadState: constants.CALCULATED,
         ants: action?.ants || state.ants,
       };
     case Types.FETCH_ODD:
@@ -46,9 +48,6 @@ export const reducer = (
         }),
       };
     case Types.SET_ODD:
-      if (state.raceState === 'calculated') {
-        return state;
-      }
       return {
         ...state,
         ants: state.ants.map(function (ant) {

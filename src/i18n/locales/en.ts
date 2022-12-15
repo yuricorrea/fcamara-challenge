@@ -15,10 +15,17 @@ export default {
     color: 'Color',
     weight: 'Weight',
     state: 'State',
-    odd: 'Likelihood',
+    odd: 'Win odd',
+  },
+  raceButton: {
+    notYetRun: 'Start a race',
+    inProgress: 'Race started',
+    calculated: 'Start over',
   },
   labels: {
-    fetchAnts: 'Get data',
+    fetchAnts: 'Get ants',
+    loading: 'Wait...',
     start: 'Start a race',
+    raceStatus: 'Race status: ',
   },
 };

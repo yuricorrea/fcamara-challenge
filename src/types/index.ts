@@ -20,4 +20,25 @@ export interface IAnt extends IAntResponse {
 export interface IContextState {
   ants: IAnt[];
   raceState: states;
+  loadState: states;
+}
+
+export interface IThemeType {
+  primaryColor: string;
+  secondaryColor: string;
+  tertiaryColor: string;
+  quaternaryColor: string;
+  textColor: string;
+  backgroundColor: string;
+}
+
+export interface IThemeProps {
+  theme: IThemeType;
+}
+
+export interface IActions {
+  fetchAnts: Function;
+  reset: Function;
+  startRace: Function;
+  endRace: Function;
 }

@@ -1,8 +1,15 @@
 import React, {useReducer} from 'react';
 import {reducer, initialState} from './reducer';
 import acts from './actions';
+import {IActions, IContextState} from '../../types';
+import {useNavigation} from '@react-navigation/native';
 
-export const Context = React.createContext({});
+interface IContext {
+  state: IContextState;
+  actions: IActions;
+}
+
+export const Context = React.createContext({} as IContext);
 
 interface P {
   children: JSX.Element;
@@ -10,7 +17,7 @@ interface P {
 
 const Provider = ({children}: P): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const actions = acts(state, dispatch);
+  const actions = acts(state, dispatch, useNavigation());
 
   return (
     <Context.Provider

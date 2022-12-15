@@ -1,8 +1,8 @@
-import I18n from 'i18n-js';
+import {I18n} from 'i18n-js';
 import * as locales from './locales';
 
-I18n.translations = locales;
-I18n.fallbacks = true;
-I18n.defaultLocale = 'en';
+const i18n = new I18n(locales);
+i18n.defaultLocale = 'en';
+i18n.enableFallback = true;
 
-export default I18n;
+export default i18n;
