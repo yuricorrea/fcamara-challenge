@@ -13,7 +13,6 @@ const Home = (): JSX.Element => {
   const isLoading = state.loadState === constants.IN_PROGRESS;
 
   const handlePress = () => {
-    console.log(state);
     if (state.loadState === constants.NOT_YET_RUN) {
       fetchAnts();
     }

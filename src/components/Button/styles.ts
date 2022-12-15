@@ -2,12 +2,12 @@ import styled from 'styled-components/native';
 import {IThemeProps} from '../../types';
 
 interface TArea extends IThemeProps {
-  disable?: boolean;
+  disabled?: boolean;
 }
 
 export const Area = styled.TouchableOpacity`
   background-color: ${(props: TArea) => props.theme.primaryColor};
-  opacity: ${(props: TArea) => (props?.disable ? '0.5' : '1')};
+  opacity: ${(props: TArea) => (props?.disabled ? '0.5' : '1')};
   justify-content: center;
   align-items: center;
   padding: 10px;
